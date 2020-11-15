@@ -53,3 +53,32 @@ class BankAccount:
             f"Routing No.: {BankAccount.routing_number}"
         )
         print("Balance: $" + "{:.2f}".format(self.balance))
+
+acc1 = BankAccount("First Example")
+acc2 = BankAccount("Second Example")
+acc3 = BankAccount("Third Example")
+
+print("-----------")
+print("Example #1:")
+print("-----------")
+
+acc1.deposit(1000)
+acc1.get_balance()
+acc1.withdraw(25)
+acc1.get_balance()
+
+print("-----------")
+print("Example #2:")
+print("-----------")
+
+acc2.deposit(200)
+acc2.withdraw(220)
+acc2.print_receipt()
+
+print("-----------")
+print("Example #3:")
+print("-----------")
+
+acc3.deposit(1000)
+acc3.add_interest()
+acc3.print_receipt()
