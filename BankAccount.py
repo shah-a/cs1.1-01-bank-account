@@ -2,45 +2,54 @@
 # Ali Shah | Nov. 09, 2020
 # CS 1.1 Assignment 1: Bank Account
 
-from random import sample
-
-# population = range(10_000_000, 100_000_000)
-# output = sample(population, 6)
-# print(output)
-
-class Account:
-    routing_number = 123_456_789
-    def __init__(self, full_name, account_number, balance=0):
-        self.full_name = full_name
-        self.account_number = account_number
-        self.balance = balance
-
-    def deposit(self):
-        pass
-
-    def withdraw(self):
-        pass
-
-    def get_balance(self):
-        pass
-
-    def haram(self):
-        pass
-
-    def print_receipt(self):
-        censored_acc_number = censor(self.account_number)
-        print(
-            f"{self.full_name}\n"
-            f"Account No.: {censored_acc_number}\n"
-            f"testing\n"
-            f"testing"
-        )
+from random import randint
 
 def censor(numbers):
+    """A helper function to censor numbers by adding asterisks."""
     numbers = str(numbers)
     numbers = "****" + numbers[-4:]
     return numbers
 
+class BankAccount:
+    """Class for bank account objects."""
 
-my_acc = Account("Ali Shah", 44444888, 5)
-my_acc.print_receipt()
+    routing_number = 123_456_789
+
+    def __init__(self, full_name):
+        """Constructor for account instances. Default balance = 0."""
+        self.full_name = full_name
+        self.account_number = randint(10_000_000, 99_999_999)
+        self.balance = 0
+
+    def deposit(self, amount):
+        """Adds amount to self.balance."""
+        self.balance += amount
+        print(f"Amount Deposited: ${amount}")
+
+    def withdraw(self, amount):
+        """Substracts amount from self.balance."""
+        if amount > self.balance:
+            self.balance -= (amount + 10)
+            print(f"Insufficient funds.")
+        else:
+            self.balance -= amount
+            print(f"Amount Withdrawn: ${amount}")
+
+    def get_balance(self):
+        """Returns account balance."""
+        print("Account Balance: $" + "{:.2f}".format(self.balance))
+        return self.balance
+
+    def add_interest(self):
+        interest = self.balance * 0.00083
+        self.balance += interest
+
+    def print_receipt(self):
+        """Displays account status."""
+        censored_num = censor(self.account_number)
+        print(
+            f"{self.full_name}\n"
+            f"Account No.: {censored_num}\n"
+            f"Routing No.: {BankAccount.routing_number}"
+        )
+        print("Balance: $" + "{:.2f}".format(self.balance))
